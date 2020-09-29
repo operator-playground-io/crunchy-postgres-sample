@@ -1,30 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejs-contacts-frontend
+  name: edge-node-react-postgres-contacts-frontend
   labels:
-    app: nodejs-contacts
+    app: edge-node-react-postgres-contacts
     tier: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nodejs-contacts
+      app: edge-node-react-postgres-contacts
       tier: frontend
   template:
     metadata:
       labels:
-        app: nodejs-contacts
+        app: edge-node-react-postgres-contacts
         tier: frontend
     spec:
       containers:
-      - name: frontend
-        image: nodejs-contacts-frontend
+      - name: edge-node-react-postgres-contacts-frontend
+        image: edge-node-react-postgres-contacts-frontend"
         ports:
         - name: http-server
-          containerPort: 8080
+          containerPort: 3000
         env:
         - name: PORT
           value: "8080"
         - name: REACT_APP_SERVER_URL
           value: nodejs-contacts-backend:8080/contacts
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "300Mi"
+          # limits:
+          #   cpu: "500m"            
+          #   memory: "600Mi"

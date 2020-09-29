@@ -4,13 +4,13 @@ metadata:
   name: postgres-example
 build:
   artifacts:
-  - image: nodejs-contacts-backend
-    context: postgresql-stack-contacts-server
+  - image: edge-node-react-postgres-contacts-backend
+    context: ../edge-node-react-postgres-contacts/backend
     sync:
       infer:
       - '**/*'
-  - image: nodejs-contacts-frontend
-    context: postgresql-stack-contacts-client
+  - image: edge-node-react-postgres-contacts-frontend
+    context: ../edge-node-react-postgres-contacts/frontend
     sync:
       infer:
       - '**/*'
@@ -18,9 +18,9 @@ deploy:
   kubectl:
     manifests:
     - ./k8s/*
-portForward:
-- resourceType: service
-  resourceName: nodejs-contacts-frontend
-  port: 80
-  address: 0.0.0.0
-  localPort: 4503
+# portForward:
+# - resourceType: service
+#  resourceName: edge-node-react-postgres-contacts-frontend
+#  port: 80
+#  address: 0.0.0.0
+#  localPort: 4503
