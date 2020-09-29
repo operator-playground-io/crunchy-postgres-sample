@@ -4,16 +4,16 @@ metadata:
   name: postgres-example
 build:
   artifacts:
-  - image: edge-node-react-postgres-contacts-backend
-    context: ../edge-node-react-postgres-contacts/backend
+  - image: edge-node-react-postgres-contacts-backend2
+    context: ../backend
     sync:
       infer:
       - '**/*'
-  - image: edge-node-react-postgres-contacts-frontend
-    context: ../edge-node-react-postgres-contacts/frontend
-    sync:
-      infer:
-      - '**/*'
+  # - image: edge-node-react-postgres-contacts-frontend
+  #   context: ../frontend
+  #   sync:
+  #     infer:
+  #     - '**/*'
 deploy:
   kubectl:
     manifests:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: edge-node-react-postgres-contacts-backend
+  name: edge-node-react-postgres-contacts-backend2
   labels:
     app: edge-node-react-postgres-contacts
     tier: backend
@@ -25,8 +25,8 @@ spec:
         args:
           - echo "Waiting for mongodb to start...";until (mongo --host nodejs-contacts-mongodb:27017 >/dev/null 2>&1) do echo "Waiting for connection for 2 sec."; sleep 2; done
      containers:
-      - name: "edge-node-react-postgres-contacts-backend"
-        image: "edge-node-react-postgres-contacts-backend"
+      - name: "edge-node-react-postgres-contacts-backend2"
+        image: "edge-node-react-postgres-contacts-backend2"
         ports:
         - name: http-server
           containerPort: 4000
