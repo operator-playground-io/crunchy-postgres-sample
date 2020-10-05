@@ -1,32 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: edge-node-react-postgres-contacts-backend2
+  name: backend
   labels:
-    app: edge-node-react-postgres-contacts
+    app: backend
     tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: edge-node-react-postgres-contacts
+      app: backend
       tier: backend
   template:
     metadata:
       labels:
-        app: edge-node-react-postgres-contacts
+        app: backend
         tier: backend
     spec:
      initContainers:
-        # Need to replace Mongo with Postgres
       - name: init-db-ready
-        image: postgres:12
-        command: ['/bin/sh', '-c']
-        args:
-          - echo "Waiting for mongodb to start...";until (mongo --host nodejs-contacts-mongodb:27017 >/dev/null 2>&1) do echo "Waiting for connection for 2 sec."; sleep 2; done
+        image: busybox
+        command: ['sh', '-c', 'until nc -z -v -w30 postgres 5432; do echo "Waiting for database connection..."; sleep 5; done;']
      containers:
       - name: "edge-node-react-postgres-contacts-backend2"
-        image: "edge-node-react-postgres-contacts-backend2"
+        image: backend:0.1
         ports:
         - name: http-server
           containerPort: 4000
@@ -34,19 +31,12 @@ spec:
         - name: PORT
           value: "4000"
         - name: DB_HOST
-          value: ""
+          value: "postgres"
         - name: DB_PORT
           value: "5432"
         - name: DB_DATABASE
-          value: ""
+          value: "contacts"
         - name: DB_USER
-          value: ""     
+          value: "postgres"     
         - name: DB_PASSWORD
-          value: ""
-        resources:
-          requests:
-            cpu: "200m"
-            memory: "300Mi"
-          # limits:
-          #   cpu: "500m"            
-          #   memory: "600Mi"  
+          value: "postgres"
