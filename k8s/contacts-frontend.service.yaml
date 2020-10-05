@@ -11,6 +11,6 @@ spec:
     app: frontend
     tier: frontend
   ports:
-  - port: 9090
+  - port: 3000
     targetPort: http-server
     nodePort: 30465

@@ -5,12 +5,12 @@ metadata:
 build:
   artifacts:
   - image: backend
-    context: ../backend
+    context: backend
     sync:
       infer:
       - '**/*'
   - image: frontend
-    context: ../frontend
+    context: frontend
     sync:
       infer:
       - '**/*'

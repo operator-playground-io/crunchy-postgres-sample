@@ -20,7 +20,7 @@ spec:
      initContainers:
       - name: init-db-ready
         image: busybox
-        command: ['sh', '-c', 'until nc -z -v -w30 postgres 5432; do echo "Waiting for database connection..."; sleep 5; done;']
+        command: ['sh', '-c', 'until nc -z -v -w30 contacts.pgo.svc.cluster.local 5432; do echo "Waiting for database connection..."; sleep 5; done;']
      containers:
       - name: "edge-node-react-postgres-contacts-backend2"
         image: backend:0.1
@@ -31,12 +31,12 @@ spec:
         - name: PORT
           value: "4000"
         - name: DB_HOST
-          value: "postgres"
+          value: "contacts.pgo.svc.cluster.local"
         - name: DB_PORT
           value: "5432"
         - name: DB_DATABASE
           value: "contacts"
         - name: DB_USER
-          value: "postgres"     
+          value: "pguser"
         - name: DB_PASSWORD
-          value: "postgres"
+          value: "password"
