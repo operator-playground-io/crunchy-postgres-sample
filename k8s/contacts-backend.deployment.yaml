@@ -20,7 +20,7 @@ spec:
      initContainers:
       - name: init-db-ready
         image: busybox
-        command: ['sh', '-c', 'until nc -z -v -w30 contacts-db.pgo.svc.cluster.local 5432; do echo "Waiting for database connection..."; sleep 5; done;']
+        command: ['sh', '-c', 'until nc -z -v -w30 contacts-db.pgo.svc.cluster.local 30435; do echo "Waiting for database connection..."; sleep 5; done;']
      containers:
       - name: "edge-node-react-postgres-contacts-backend2"
         image: backend:0.1
