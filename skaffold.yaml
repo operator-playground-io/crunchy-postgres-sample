@@ -7,13 +7,15 @@ build:
   - image: backend
     context: backend
     sync:
-      infer:
-      - '**/*'
+      manual:
+      - src: 'backend/*'
+        dest: /app/*
   - image: frontend
     context: frontend
     sync:
-      infer:
-      - '**/*'
+      manual:
+      - src: 'frontend/*'
+        dest: /www/*
 deploy:
   kubectl:
     manifests:
